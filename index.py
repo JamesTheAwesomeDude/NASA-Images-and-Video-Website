@@ -14,14 +14,14 @@ API_ENDPOINTS={
 }
 
 def search_NASA(search_term):
-	return _url_json(''.join(
+	return _url_json(''.join([
 	 API_ROOT,
-	 API_ENDPOINTS['search'],
+	 API_ENDPOINTS['srch'],
 	 '?',
-	 urllib.request.urlencode({
+	 urllib.parse.urlencode({
 	  'q': search_term
-	 }
-	))
+	 })
+	]))
 
 def _url_json(url):
 	with urllib.request.urlopen(url) as response:
