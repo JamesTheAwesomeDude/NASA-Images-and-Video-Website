@@ -4,6 +4,8 @@
 import urllib.request
 import urllib.parse
 import json
+import cgi,cgitb
+cgitb.enable()
 
 API_ROOT='https://images-api.nasa.gov'
 API_ENDPOINTS={
@@ -28,3 +30,17 @@ def _url_json(url):
 		return json.loads(
 		 response.read().decode()
 		)
+if __name__=="__main__":
+	x=search_NASA('orange')['collection']['items'][8]
+	print("""Content-type:text/html\r\n\r\n
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>TEST PAGE LMAO</title>
+<body>
+<img src="{src}" title="{title}" />
+</body>
+</html>""".format(
+	 src=[link for link in x['links'] if link['rel']=='preview' and link['render']=='image'][0]['href'],
+	 title=x['data'][0]['title']
+	))
