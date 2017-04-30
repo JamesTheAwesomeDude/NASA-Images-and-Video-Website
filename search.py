@@ -29,7 +29,6 @@ def allimages_NASA():
 		except urllib.error.HTTPError:
 			break
 		items_cumulative+=json['items']
-		print(json['links'])
 		if not [link for link in json['links'] if link['rel']=='next']:
 		 break
 	return items_cumulative
@@ -43,6 +42,17 @@ def _search(data):
 	  urllib.parse.urlencode(data)
 	 ])
 	) as response:
+		return json.loads(
+		 response.read().decode()
+		)
+
+def _asset(nasa_id):
+	with urllib.request.urlopen(
+	 ''.join([
+	  API_ROOT,
+	  API_ENDPOINTS['asst'].format(nasa_id)
+	 ])
+	)as response:
 		return json.loads(
 		 response.read().decode()
 		)
