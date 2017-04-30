@@ -6,20 +6,19 @@
 <style type="text/css">
 body {
 	background: #26282F url("files/global-header_bg.jpg") no-repeat top;
-fixed;
-	display: table;
+	color: white;
+//	display: table;
 	width: 100%;
 }
 
 #header{
-	display: table-row;
+	display: table;
 	width: 100%;
 	padding: auto;
 	height: auto;
 	vertical-align: middle;
 }
 #header>*{
-	//display: table-cell;
 	vertical-align: middle;
 }
 #body {
@@ -29,7 +28,6 @@ fixed;
 #top-right-logo {
 	float:right;
 	margin: 10pt;
-	color: white;
 }
 #top-right-logo img{
 	align:right;
@@ -37,25 +35,41 @@ fixed;
 #top-right-logo h1{
 	float:left;
 }
+.leftpane {
+	float: left;
+}
+.rightpane {
+	float: right;
+}
+#download-button {
+	background: blue;
+	color: white;
+	padding: .5em .75em;
+}
 
 </style>
 
 </head>
 <body>
 <div id="header">
-<form id="top-left-search">
-<input type="text" name="q" placeholder="Search For…" />
-</form>
-<div id="top-right-logo">
-<h1>NASA Image and<br />
-Video Library</h1>
-<img src="files/nasa_logo-large.png" />
-</div>
+	<form id="top-left-search">
+	<input type="text" name="q" placeholder="Search For…" />
+	</form>
+	<div id="top-right-logo">
+	<h1>NASA Image and<br />
+	Video Library</h1>
+	<img src="files/nasa_logo-large.png" />
+	</div>
 </div>
 <div id="body">
-<div 
-id="path"><span>Home</span><span>&gt;</span><span>PIA03149</span></div>
-<img src="files/PIA03149~small.jpg" />
+	<div class="leftpane">
+		<div id="path"><span>Home</span><span>&gt;</span><span>PIA03149</span></div>
+		<img src="files/PIA03149~small.jpg" />
+	</div>
+	<div class="rightpane">
+		<h1>{title}</h1>
+		<a id="download-button" href="files/PIA03149~orig.jpg">Downlaod</a>
+	</div>
 </div>
 </body>
 </html>
