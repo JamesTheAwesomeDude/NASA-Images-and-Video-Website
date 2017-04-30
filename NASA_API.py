@@ -17,10 +17,6 @@ API_ENDPOINTS={
 }
 MEDIA_TYPES=['image', 'video', 'audio']
 
-def sitemap():
-	for item in allitems_NASA():
-		print(_details_url(item['data'][0]['nasa_id']))
-
 def allitems_NASA():
 	items_cumulative=[]
 	for media_type in MEDIA_TYPES:
