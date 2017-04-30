@@ -21,10 +21,13 @@ def allimages_NASA():
 	page=0
 	while True:
 		page+=1
-		json=_search({
-		 'media_type': 'image',
-		 'page': page
-		})['collection']
+		try:
+			json=_search({
+			 'media_type': 'image',
+			 'page': page
+			})['collection']
+		except urllib.error.HTTPError:
+			break
 		items_cumulative+=json['items']
 		print(json['links'])
 		if not [link for link in json['links'] if link['rel']=='next']:
