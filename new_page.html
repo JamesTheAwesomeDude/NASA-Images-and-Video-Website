@@ -11,6 +11,17 @@ body {
 	width: 100%;
 }
 
+#top-left-search{
+	display: table-cell;
+	padding: 0em 0em 0em 6.5em;
+}
+#top-left-search 	input{
+	padding: .5em;
+	font-size: 18pt;
+	background: black;
+	color: white
+}
+
 #header{
 	display: table;
 	width: 100%;
@@ -26,25 +37,32 @@ body {
 }
 
 #top-right-logo {
+	display: table-cell;
 	float:right;
 	margin: 10pt;
 }
 #top-right-logo img{
 	align:right;
+	vertical-align: bottom;
 }
 #top-right-logo h1{
 	float:left;
 }
 .leftpane {
+	padding: 2em;
 	float: left;
 }
 .rightpane {
-	float: right;
+	padding: 2em;
+//	float: right;
 }
 #download-button {
 	background: blue;
 	color: white;
 	padding: .5em .75em;
+}
+#path>*{
+	padding: .3em;
 }
 
 </style>
@@ -62,12 +80,13 @@ body {
 	</div>
 </div>
 <div id="body">
+	<div id="path"><span>Home</span><span>&gt;</span><span>PIA03149</span></div>
 	<div class="leftpane">
-		<div id="path"><span>Home</span><span>&gt;</span><span>PIA03149</span></div>
+		<h1>Handle-shaped Prominence</h1>
 		<img src="files/PIA03149~small.jpg" />
 	</div>
 	<div class="rightpane">
-		<h1>{title}</h1>
+		<p id="description">NASA Extreme Ultraviolet Imaging Telescope aboard ESA’s SOHO spacecraft took this image of a huge, handle-shaped prominence in 1999. Prominences are huge clouds of relatively cool dense plasma suspended in the Sun hot, thin corona.</p>
 		<a id="download-button" href="files/PIA03149~orig.jpg">Downlaod</a>
 	</div>
 </div>
