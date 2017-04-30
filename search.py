@@ -32,8 +32,15 @@ def allitems_NASA():
 				 'media_type': media_type,
 				 'page': page
 				})['collection']
-			except urllib.error.HTTPError:
-				break
+			# WORKAROUND due to their BROKEN API
+			# which has invalid ['collection']['links']
+			# URLs which give HTTP 400 errors for being
+			# out-of-range (presumably?)
+			except urllib.error.HTTPError as HTTPError:
+				if HTTPError.code != 400:
+					raise
+				else:
+					break
 			items_cumulative+=json['items']
 			if 'links' not in json or not [link for link in json['links'] if link['rel']=='next']:
 				break
