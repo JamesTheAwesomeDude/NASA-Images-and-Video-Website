@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # MIT License 2017, James Edington <codegeek98@gmail.com>
 
-import cgi,cgitb
-cgitb.enable()
+#import cgi,cgitb
+#cgitb.enable()
 
 import urllib.request
 import urllib.parse
@@ -15,22 +15,28 @@ API_ENDPOINTS={
  'meta': "/metadata/{}",
  'capt': "/captions/{}"
 }
+MEDIA_TYPES=['image', 'video', 'audio']
 
-def allimages_NASA():
+def sitemap():
+	for item in allitems_NASA():
+		print(_details_url(item['data'][0]['nasa_id']))
+
+def allitems_NASA():
 	items_cumulative=[]
-	page=0
-	while True:
-		page+=1
-		try:
-			json=_search({
-			 'media_type': 'image',
-			 'page': page
-			})['collection']
-		except urllib.error.HTTPError:
-			break
-		items_cumulative+=json['items']
-		if not [link for link in json['links'] if link['rel']=='next']:
-		 break
+	for media_type in MEDIA_TYPES:
+		page=0
+		while True:
+			page+=1
+			try:
+				json=_search({
+				 'media_type': media_type,
+				 'page': page
+				})['collection']
+			except urllib.error.HTTPError:
+				break
+			items_cumulative+=json['items']
+			if 'links' not in json or not [link for link in json['links'] if link['rel']=='next']:
+				break
 	return items_cumulative
 
 def _search(data):
@@ -57,18 +63,9 @@ def _asset(nasa_id):
 		 response.read().decode()
 		)
 
+def _details_url(nasa_id):
+	return 'https://images.nasa.gov/#/details-{}.html'.format(nasa_id)
+
 if __name__=="__main__":
-	x=_search({'q': "orange"})['collection']['items']
-	print("""Content-type:text/html\r\n\r\n
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>TEST PAGE LMAO</title>
-<body>""")
-	for link in x:
-		print('<img src="{src}" title="{title}" />'.format(
-		 src=[l for l in link['links'] if l['rel']=='preview'][0]['href'],
-		 title=link['data'][0]['title']
-		))
-	print("""</body>
-</html>""")
+#	sitemap()
+	pass
